@@ -716,19 +716,6 @@ export const events = [
       }
     ]
   },
-      {
-        text: '💎 继续持有',
-        effect: { riskTolerance: 15, stress: 15 },
-        dialogue: '感觉还能涨！先拿着看看！',
-      },
-      {
-        text: '🚀 加仓3000',
-        effect: { money: -3000, riskTolerance: 20, stress: 25 },
-        dialogue: '既然涨了，那就加仓！',
-        requirements: { money: 3000 }
-      }
-    ]
-  },
 
   {
     id: 'crypto_result_watch',
