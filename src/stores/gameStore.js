@@ -178,6 +178,11 @@ const useGameStore = create((set, get) => ({
       nextEventId: nextEventId
     }));
 
+    // 检查成就
+    setTimeout(() => {
+      state.checkAchievements();
+    }, 500);
+
     // 检查是否达到100次事件
     if (newEventCount >= state.maxEvents) {
       set({
@@ -218,6 +223,18 @@ const useGameStore = create((set, get) => ({
     set((state) => ({
       portfolio: [...state.portfolio, stock]
     }));
+
+    // 检查赌徒成就（单次投资超过5万）
+    const state = get();
+    if (stock.cost >= 50000 && !state.unlockedAchievements.includes('gambler')) {
+      state.unlockAchievement('gambler');
+      state.showDialogueBubble('🎉 解锁成就: 赌徒！单次投资超5万！', 2000);
+    }
+
+    // 延迟检查其他成就
+    setTimeout(() => {
+      state.checkAchievements();
+    }, 100);
   },
 
   // 卖出投资
@@ -225,6 +242,66 @@ const useGameStore = create((set, get) => ({
     set((state) => ({
       portfolio: state.portfolio.filter(s => s.id !== id)
     }));
+  },
+
+  // 检查并解锁成就
+  checkAchievements: () => {
+    const state = get();
+    const { player, portfolio, relationships, unlockedAchievements } = state;
+
+    // 💰 初次投资
+    if (portfolio.length > 0 && !unlockedAchievements.includes('first_investment')) {
+      state.unlockAchievement('first_investment');
+      state.showDialogueBubble('🎉 解锁成就: 初次投资！', 2000);
+    }
+
+    // 💎 资产10万
+    if (player.money >= 100000 && !unlockedAchievements.includes('rich_man')) {
+      state.unlockAchievement('rich_man');
+      state.showDialogueBubble('🎉 解锁成就: 资产10万！', 2000);
+    }
+
+    // 💸 身无分文
+    if (player.money === 0 && !unlockedAchievements.includes('broke')) {
+      state.unlockAchievement('broke');
+      state.showDialogueBubble('🎉 解锁成就: 身无分文...', 2000);
+    }
+
+    // 🦋 社交蝴蝶
+    if (player.social >= 95 && !unlockedAchievements.includes('social_butterfly')) {
+      state.unlockAchievement('social_butterfly');
+      state.showDialogueBubble('🎉 解锁成就: 社交蝴蝶！', 2000);
+    }
+
+    // 🧠 天才
+    if (player.intelligence >= 90 && !unlockedAchievements.includes('genius')) {
+      state.unlockAchievement('genius');
+      state.showDialogueBubble('🎉 解锁成就: 天才！', 2000);
+    }
+
+    // 🍀 欧皇
+    if (player.luck >= 90 && !unlockedAchievements.includes('lucky_dog')) {
+      state.unlockAchievement('lucky_dog');
+      state.showDialogueBubble('🎉 解锁成就: 欧皇！', 2000);
+    }
+
+    // 😰 压力山大
+    if (player.stress >= 100 && !unlockedAchievements.includes('stress_max')) {
+      state.unlockAchievement('stress_max');
+      state.showDialogueBubble('🎉 解锁成就: 压力山大...', 2000);
+    }
+
+    // 🏥 健康警报
+    if (player.health <= 20 && !unlockedAchievements.includes('health_crisis')) {
+      state.unlockAchievement('health_crisis');
+      state.showDialogueBubble('🎉 解锁成就: 健康警报！', 2000);
+    }
+
+    // 👑 人脉之王
+    if (relationships.length >= 10 && !unlockedAchievements.includes('network_king')) {
+      state.unlockAchievement('network_king');
+      state.showDialogueBubble('🎉 解锁成就: 人脉之王！', 2000);
+    }
   },
 
   // 解锁成就
