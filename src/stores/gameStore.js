@@ -146,6 +146,16 @@ const useGameStore = create((set, get) => ({
 
     if (!event) return;
 
+    // 检查是否有足够的钱
+    if (choice.effect && choice.effect.money < 0) {
+      const cost = Math.abs(choice.effect.money);
+      if (state.player.money < cost) {
+        state.showDialogueBubble('我透！钱不够...', 2000);
+        set({ currentEvent: null }); // 清除事件，让玩家继续
+        return;
+      }
+    }
+
     // 应用选择的效果
     if (choice.effect) {
       Object.entries(choice.effect).forEach(([key, value]) => {
