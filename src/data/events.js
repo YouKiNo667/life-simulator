@@ -76,13 +76,17 @@ export const events = [
         text: '🎰 梭哈！全仓比亚迪',
         effect: { money: -3000, riskTolerance: 20, stress: 30 },
         dialogue: '土块就是要all in！667，看我表演！老子无敌的！',
-        nextEvent: 'stock_result_byd'
+        nextEvent: 'stock_result_byd',
+        action: 'buyStock',
+        stock: { id: 'byd_1', name: '比亚迪', cost: 3000, value: 3000 }
       },
       {
         text: '💰 理性投资，买1000块试试',
         effect: { money: -1000, financialKnowledge: 10, intelligence: 5 },
         dialogue: '稳健一点，不能当猪。先试试水温！小心驶得万年船！',
-        nextEvent: 'stock_result_byd_small' // 小仓位的结果
+        nextEvent: 'stock_result_byd_small',
+        action: 'buyStock',
+        stock: { id: 'byd_2', name: '比亚迪', cost: 1000, value: 1000 }
       },
       {
         text: '🚫 不碰股票，太危险',

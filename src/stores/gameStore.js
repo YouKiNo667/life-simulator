@@ -157,6 +157,11 @@ const useGameStore = create((set, get) => ({
       });
     }
 
+    // 处理特殊动作（买股票等）
+    if (choice.action === 'buyStock' && choice.stock) {
+      state.addInvestment(choice.stock);
+    }
+
     // 增加事件计数
     const newEventCount = state.eventCount + 1;
 
