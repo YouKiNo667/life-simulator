@@ -408,7 +408,7 @@ const GameOverScreen = () => {
             boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
           }}
         >
-          🔄 再来一次土块人生
+          🔄 再来一次奶辰人生
         </motion.button>
       </motion.div>
     </div>

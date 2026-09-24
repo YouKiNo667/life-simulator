@@ -92,7 +92,7 @@ const StartScreen = () => {
             textShadow: '0 4px 20px rgba(0,0,0,0.3)'
           }}
         >
-          💰 金融社牛人生模拟器
+          💰 奶辰模拟器
         </motion.h1>
 
         <motion.p
@@ -106,7 +106,7 @@ const StartScreen = () => {
             fontWeight: 500
           }}
         >
-          从5000块到百万富翁？看你的土块操作！
+          从5000块到百万富翁？看奶辰的操作！
         </motion.p>
 
         {/* 特色标签 */}
@@ -122,7 +122,7 @@ const StartScreen = () => {
             flexWrap: 'wrap'
           }}
         >
-          {['🎰 土块系统', '📈 真实K线', '👥 人脉网络', '🏆 多重结局'].map((tag, i) => (
+          {['🎰 选择系统', '📈 真实K线', '👥 人脉网络', '🏆 多重结局'].map((tag, i) => (
             <motion.div
               key={tag}
               whileHover={{ scale: 1.1, rotate: 5 }}
@@ -167,7 +167,7 @@ const StartScreen = () => {
             transition: 'all 0.3s ease'
           }}
         >
-          🚀 开始土块人生
+          🚀 开始奶辰人生
         </motion.button>
 
         {/* 提示文字 */}
