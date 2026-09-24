@@ -595,38 +595,40 @@ export const events = [
         text: '🎰 全仓梭哈比特币',
         effect: { money: -4000, riskTolerance: 30, stress: 50 },
         dialogue: '667！土块就完了！比特币冲冲冲！一夜暴富就靠这波了！',
-        nextEvent: 'crypto_result'
+        nextEvent: 'crypto_result',
+        action: 'buyStock',
+        stock: { id: 'btc_1', name: '比特币', cost: 4000, value: 4000 }
       },
       {
         text: '💰 买一点试试',
         effect: { money: -1000, riskTolerance: 10, financialKnowledge: 10 },
         dialogue: '小赌怡情！先试试水，不行就跑！稳健土块！',
-        nextEvent: 'crypto_result_small' // 小仓位的结果
+        nextEvent: 'crypto_result_small',
+        action: 'buyStock',
+        stock: { id: 'btc_2', name: '比特币', cost: 1000, value: 1000 }
       },
       {
         text: '🚫 不碰，太邪门',
         effect: { intelligence: 10, stress: -10 },
         dialogue: '老子不当韭菜！这玩意儿太玄学了！看不懂的不碰！',
-        nextEvent: 'crypto_result_watch' // 看着学长赚钱
+        nextEvent: 'crypto_result_watch'
       },
       {
         text: '🤔 先研究一下区块链',
         effect: { intelligence: 15, financialKnowledge: 12, stress: 10 },
         dialogue: '不能盲目跟风！先搞懂原理再说！知己知彼！',
-        // 没有后续
       },
       {
         text: '📱 问问懂行的人',
         effect: { social: 10, intelligence: 8, stress: 5 },
         dialogue: '这种事要多听听意见！找个懂的人问问！',
         requirements: { social: 70 }
-        // 没有后续
       },
       {
         text: '😏 "你自己买了吗？"',
         effect: { intelligence: 12, stress: -5 },
         dialogue: '先看看你自己信不信！推荐的人往往自己不买！',
-        nextEvent: 'crypto_result_watch' // 看着学长赚钱
+        nextEvent: 'crypto_result_watch'
       }
     ]
   },
@@ -641,32 +643,42 @@ export const events = [
         text: '💰 立即卖出，落袋为安',
         effect: { money: 6000, intelligence: 15, stress: -30 },
         dialogue: '见好就收！这波血赚，老子财富自由了！知进退才是大佬！',
+        action: 'sellStock',
+        stockId: 'btc_1'
       },
       {
         text: '💎 继续持有，10万不卖',
         effect: { riskTolerance: 20, stress: 40 },
         dialogue: '还能涨！土块到底！目标10万一个！牛市才刚开始！',
+        action: 'updateStock',
+        stockId: 'btc_1',
+        newValue: 6000
       },
       {
         text: '📢 拉同学一起买',
         effect: { social: 20, reputation: 10, stress: 20 },
         dialogue: '乐子来了！一起发财！老子带你们飞！赚钱大家一起赚！',
+        action: 'updateStock',
+        stockId: 'btc_1',
+        newValue: 6000
       },
       {
         text: '💎 卖一半，留一半',
         effect: { money: 3000, intelligence: 18, stress: -10 },
         dialogue: '保守策略！既能保本又能博收益！老子太聪明了！',
+        action: 'updateStock',
+        stockId: 'btc_1',
+        newValue: 3000
       },
       {
-        text: '🚀 加仓！再买5000块',
-        effect: { money: -5000, riskTolerance: 30, stress: 35 },
+        text: '💎 加仓！再买2000',
+        effect: { money: -2000, riskTolerance: 25, stress: 35 },
         dialogue: '土块加倍！趁着涨势继续冲！这波要赚大的！',
-        requirements: { money: 5000 }
-      },
-      {
-        text: '📱 炫耀一波朋友圈',
-        effect: { social: 18, reputation: 12, stress: -20 },
-        dialogue: '哈哈哈必须晒一波！让他们看看什么叫投资眼光！',
+        requirements: { money: 2000 },
+        action: 'updateStockAndBuy',
+        stockId: 'btc_1',
+        newValue: 6000,
+        newStock: { id: 'btc_1_add', name: '比特币', cost: 2000, value: 2000 }
       }
     ]
   },
@@ -681,7 +693,29 @@ export const events = [
         text: '💰 卖出，落袋为安',
         effect: { money: 1500, intelligence: 12, stress: -15 },
         dialogue: '赚了500！虽然不多但稳！',
+        action: 'sellStock',
+        stockId: 'btc_2'
       },
+      {
+        text: '💎 继续持有',
+        effect: { riskTolerance: 15, stress: 20 },
+        dialogue: '感觉还能涨！先拿着！',
+        action: 'updateStock',
+        stockId: 'btc_2',
+        newValue: 1500
+      },
+      {
+        text: '💎 加仓2000',
+        effect: { money: -2000, riskTolerance: 20, stress: 25 },
+        dialogue: '既然涨了，那就加仓！',
+        requirements: { money: 2000 },
+        action: 'updateStockAndBuy',
+        stockId: 'btc_2',
+        newValue: 1500,
+        newStock: { id: 'btc_2_add', name: '比特币', cost: 2000, value: 2000 }
+      }
+    ]
+  },
       {
         text: '💎 继续持有',
         effect: { riskTolerance: 15, stress: 15 },
