@@ -219,35 +219,53 @@ export const events = [
     choices: [
       {
         text: '😱 恐慌性抛售，赶紧跑',
-        effect: { money: 210, stress: -15, intelligence: -5 },
+        effect: { money: 3174, stress: -15, intelligence: -5 },
         dialogue: '我是猪啊...早该卖了！慌了慌了！逃命要紧！',
+        action: 'sellStock',
+        stockId: 'byd_1'
       },
       {
         text: '💎 死扛到底，不割肉',
         effect: { riskTolerance: 20, stress: 40, health: -10 },
         dialogue: '土块的本质就是要扛！不割不割就不割！死了都不卖！',
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 3174
       },
       {
         text: '📊 分析原因，越跌越买',
         effect: { money: -1000, financialKnowledge: 15, intelligence: 10 },
         dialogue: '危机就是机会！现在是抄底良机！巴菲特说的对！',
-        requirements: { financialKnowledge: 40 }
+        requirements: { financialKnowledge: 40 },
+        action: 'updateStockAndBuy',
+        stockId: 'byd_1',
+        newValue: 3174,
+        newStock: { id: 'byd_1_dip', name: '比亚迪', cost: 1000, value: 1000 }
       },
       {
         text: '😰 卖一半止损',
-        effect: { money: 100, stress: -5, intelligence: 8 },
+        effect: { money: 1587, stress: -5, intelligence: 8 },
         dialogue: '止损还是要的...留一半看看能不能回本！',
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 1587
       },
       {
         text: '📱 问学姐怎么办',
         effect: { social: 10, stress: -10, financialKnowledge: 5 },
         dialogue: '我透，学姐救命！你说该怎么办？！',
-        requirements: { social: 70 }
+        requirements: { social: 70 },
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 3174
       },
       {
         text: '🤡 发朋友圈自嘲',
         effect: { social: 15, stress: -20, reputation: -5 },
         dialogue: '哈哈哈，老子亏麻了！谁还没被割过韭菜啊！',
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 3174
       }
     ]
   },
@@ -260,18 +278,26 @@ export const events = [
     choices: [
       {
         text: '😰 赶紧卖',
-        effect: { money: 50, stress: -10 },
-        dialogue: '算了，至少还赚了50！',
+        effect: { money: 1058, stress: -10 },
+        dialogue: '算了，至少还赚了58！',
+        action: 'sellStock',
+        stockId: 'byd_2'
       },
       {
         text: '💎 继续持有',
         effect: { stress: 15, intelligence: 5 },
         dialogue: '长期投资！不慌！',
+        action: 'updateStock',
+        stockId: 'byd_2',
+        newValue: 1058
       },
       {
         text: '📊 分析一下',
         effect: { intelligence: 10, financialKnowledge: 8 },
         dialogue: '冷静分析，看看是技术回调还是趋势反转！',
+        action: 'updateStock',
+        stockId: 'byd_2',
+        newValue: 1058
       }
     ]
   },
