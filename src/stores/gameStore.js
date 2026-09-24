@@ -162,6 +162,22 @@ const useGameStore = create((set, get) => ({
       state.addInvestment(choice.stock);
     }
 
+    // 卖出股票
+    if (choice.action === 'sellStock' && choice.stockId) {
+      state.sellInvestment(choice.stockId);
+    }
+
+    // 更新股票价值
+    if (choice.action === 'updateStock' && choice.stockId) {
+      state.updateStockValue(choice.stockId, choice.newValue);
+    }
+
+    // 更新股票价值并买入新股票
+    if (choice.action === 'updateStockAndBuy' && choice.stockId && choice.newStock) {
+      state.updateStockValue(choice.stockId, choice.newValue);
+      state.addInvestment(choice.newStock);
+    }
+
     // 增加事件计数
     const newEventCount = state.eventCount + 1;
 
@@ -246,6 +262,15 @@ const useGameStore = create((set, get) => ({
   sellInvestment: (id) => {
     set((state) => ({
       portfolio: state.portfolio.filter(s => s.id !== id)
+    }));
+  },
+
+  // 更新股票价值
+  updateStockValue: (id, newValue) => {
+    set((state) => ({
+      portfolio: state.portfolio.map(s =>
+        s.id === id ? { ...s, value: newValue } : s
+      )
     }));
   },
 

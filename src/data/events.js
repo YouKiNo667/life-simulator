@@ -124,35 +124,53 @@ export const events = [
     choices: [
       {
         text: '💰 见好就收，落袋为安',
-        effect: { money: 450, intelligence: 10, stress: -20 },
+        effect: { money: 3450, intelligence: 10, stress: -20 },
         dialogue: '太强了！赚了一波就跑！这才是高手操作！知进退才是真大佬！',
+        action: 'sellStock',
+        stockId: 'byd_1'
       },
       {
         text: '🚀 继续持有，还能涨',
         effect: { riskTolerance: 15, stress: 20 },
         dialogue: '这才哪到哪！土块到底！目标翻倍！涨到天上去！',
-        nextEvent: 'stock_crash_event'
+        nextEvent: 'stock_crash_event',
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 3450
       },
       {
         text: '📢 教室友炒股，收学费',
         effect: { money: 200, social: 20, reputation: 10 },
         dialogue: '乐子来了，当导师了！一个人200！排队报名啊！',
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 3450
       },
       {
         text: '💎 加仓！再买2000块',
         effect: { money: -2000, riskTolerance: 25, stress: 30 },
         dialogue: '既然涨了，那就加仓！土块加倍！一路冲到底！',
-        requirements: { money: 2000 }
+        requirements: { money: 2000 },
+        action: 'updateStockAndBuy',
+        stockId: 'byd_1',
+        newValue: 3450,
+        newStock: { id: 'byd_1_add', name: '比亚迪', cost: 2000, value: 2000 }
       },
       {
         text: '🤔 卖一半，留一半',
-        effect: { money: 225, intelligence: 12, stress: -5 },
+        effect: { money: 1725, intelligence: 12, stress: -5 },
         dialogue: 'ok，稳健策略！既能保本又能博取收益！老子太聪明了！',
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 1725
       },
       {
         text: '📱 发朋友圈炫耀',
         effect: { social: 15, reputation: 8, stress: -15 },
         dialogue: '哈哈哈必须炫一波！让他们看看什么叫股神！',
+        action: 'updateStock',
+        stockId: 'byd_1',
+        newValue: 3450
       }
     ]
   },
@@ -165,21 +183,30 @@ export const events = [
     choices: [
       {
         text: '💰 卖出，落袋为安',
-        effect: { money: 150, intelligence: 10, stress: -10 },
+        effect: { money: 1150, intelligence: 10, stress: -10 },
         dialogue: '赚了150！虽然不多但是稳！',
+        action: 'sellStock',
+        stockId: 'byd_2'
       },
       {
         text: '🚀 继续持有',
         effect: { riskTolerance: 10, stress: 10 },
         dialogue: '感觉还能涨！先拿着！',
-        nextEvent: 'stock_crash_event_small'
+        nextEvent: 'stock_crash_event_small',
+        action: 'updateStock',
+        stockId: 'byd_2',
+        newValue: 1150
       },
       {
         text: '💎 加仓2000',
         effect: { money: -2000, riskTolerance: 15, stress: 20 },
         dialogue: '既然涨了，那就加仓！',
         requirements: { money: 2000 },
-        nextEvent: 'stock_crash_event'
+        nextEvent: 'stock_crash_event',
+        action: 'updateStockAndBuy',
+        stockId: 'byd_2',
+        newValue: 1150,
+        newStock: { id: 'byd_2_add', name: '比亚迪', cost: 2000, value: 2000 }
       }
     ]
   },
